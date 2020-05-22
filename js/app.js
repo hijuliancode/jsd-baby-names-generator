@@ -36,7 +36,6 @@ function cargarNombres(e) {
       const results = data.results;
       let htmlNames = '<ul class="lista">'
       results.forEach(result => {
-        console.log(result);
         htmlNames += `
           <li>${result.name.first}</li>
         `;
@@ -44,8 +43,6 @@ function cargarNombres(e) {
       htmlNames += '</ul>'
       resultado.innerHTML = htmlNames;
     })
-    .catch(error => {
-      console.log('Error => ', error)
-    })
+    .catch(error => console.log('Error => ', error))
 
 }
