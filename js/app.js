@@ -29,26 +29,23 @@ function cargarNombres(e) {
     url += `results=${cantidad}`
   }
 
-  // Llamado Ajax
-  const xhr = new XMLHttpRequest()
-
-  xhr.open('GET', url, true)
-
-  xhr.onload = function () {
-    const results = JSON.parse(this.responseText).results
-    let htmlNames = '<ul class="lista">'
-
-    results.forEach(result => {
-      console.log(result);
-      htmlNames += `
-        <li>${result.name.first}</li>
-      `;
+  // Llamado al API
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const results = data.results;
+      let htmlNames = '<ul class="lista">'
+      results.forEach(result => {
+        console.log(result);
+        htmlNames += `
+          <li>${result.name.first}</li>
+        `;
+      })
+      htmlNames += '</ul>'
+      resultado.innerHTML = htmlNames;
     })
-    htmlNames += '</ul>'
-
-    resultado.innerHTML = htmlNames;
-  }
-
-  xhr.send()
+    .catch(error => {
+      console.log('Error => ', error)
+    })
 
 }
